@@ -1,5 +1,5 @@
 <?php
-/* Plugin Name: Opening Hours
+/* Plugin Name: Opening Hour
 */
 add_action('wp_enqueue_scripts', 'abg_add_styles');
 function abg_add_styles() {
