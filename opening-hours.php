@@ -18,7 +18,7 @@ function my_shortcode_function($atts,$content) {
     $opening_hours = get_post_meta($id, "_abg_opening_hours", true);
     $opening_hours = ($opening_hours != '') ? json_decode($opening_hours) : array();
 
-    return "<h1>".$opening_hours[0]."</h1>";
+    return "<h1>".$opening_hours[2]."</h1>";
 
 
 }
@@ -75,6 +75,13 @@ function abg_register_opening_hours() {
 
 add_action('add_meta_boxes', 'abg_plugin_meta_box');
 
+add_action('admin_init','my_meta_init');
+function my_meta_init()
+{
+    wp_register_style('opening-hours_css', plugins_url('css/admin.css', __FILE__));
+    wp_enqueue_style('opening-hours_css');
+  }
+
 function abg_plugin_meta_box() {
 
     add_meta_box("abg-opening-hours-metabox", "Opening Hours", 'abg_view_metabox', "opening_hours", "normal");
@@ -96,24 +103,30 @@ function abg_view_metabox() {
       <table class="form-table">
       <tbody>
       <tr>
-      <th><label for="Upload Images">Image 1</label></th>
+      <th><label for="Upload Images"><span id="blop">Monday</span>, from</label></th>
       <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[0].'" /></td>
-      </tr>
-      <tr>
-      <th><label for="Upload Images">Image 2</label></th>
+      <th><label for="Upload Images">To</label></th>
       <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[1].'" /></td>
       </tr>
       <tr>
-      <th><label for="Upload Images">Image 3</label></th>
+      <th><label for="Upload Images">Tuesday</label></th>
       <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[2].'" /></td>
-      </tr>
-      <tr>
-      <th><label for="Upload Images">Image 4</label></th>
       <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[3].'" /></td>
       </tr>
       <tr>
-      <th><label for="Upload Images">Image 5</label></th>
+      <th><label for="Upload Images">Wednesday</label></th>
       <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[4].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[5].'" /></td>
+      </tr>
+      <tr>
+      <th><label for="Upload Images">Thursday</label></th>
+      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[6].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[7].'" /></td>
+      </tr>
+      <tr>
+      <th><label for="Upload Images">Friday</label></th>
+      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[8].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[9].'" /></td>
       </tr>
       </tbody>
       </table>
