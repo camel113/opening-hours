@@ -18,7 +18,33 @@ function my_shortcode_function($atts,$content) {
     $opening_hours = get_post_meta($id, "_abg_opening_hours", true);
     $opening_hours = ($opening_hours != '') ? json_decode($opening_hours) : array();
 
-    return "<h1>".$opening_hours[2]."</h1>";
+    return "<table>
+              <tr>
+                <th>Monday</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Monday</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Monday</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Monday</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Monday</th>
+                <td></td>
+                <td></td>
+              </tr>
+              </table>";
 
 
 }
