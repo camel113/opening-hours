@@ -104,29 +104,29 @@ function abg_view_metabox() {
       <tbody>
       <tr>
       <th><label for="Upload Images"><span id="blop">Monday</span>, from</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[0].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[0].'" /></td>
       <th><label for="Upload Images">To</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[1].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[1].'" /></td>
       </tr>
       <tr>
       <th><label for="Upload Images">Tuesday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[2].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[3].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[2].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[3].'" /></td>
       </tr>
       <tr>
       <th><label for="Upload Images">Wednesday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[4].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[5].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[4].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[5].'" /></td>
       </tr>
       <tr>
       <th><label for="Upload Images">Thursday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[6].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[7].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[6].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[7].'" /></td>
       </tr>
       <tr>
       <th><label for="Upload Images">Friday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[8].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="gallery_img[]" value="'.$opening_times[9].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[8].'" /></td>
+      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[9].'" /></td>
       </tr>
       </tbody>
       </table>
@@ -162,7 +162,7 @@ function abg_save_opening_hours($post_id) {
 
        //print_r($_POST['gallery_img']);exit;
 
-       $opening_times= (isset($_POST['gallery_img']) ? $_POST['gallery_img'] : '');
+       $opening_times= (isset($_POST['opening_times']) ? $_POST['opening_times'] : '');
 
        $opening_times = strip_tags(json_encode($opening_times));
 
