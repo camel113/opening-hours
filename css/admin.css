@@ -1,3 +1,18 @@
-#blop{
-	color: red;
+.abg-from{
+	float: left;
+}
+.abg-from label{
+	width: 100px;
+	display: inline-block;
+}
+.abg-from input{
+	width: 50px;
+}
+.abg-to label{
+	width: 20px;
+	display: inline-block;
+	margin-left: 10px;
+}
+.abg-to input{
+	width: 50px;
 }

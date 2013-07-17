@@ -100,36 +100,46 @@ function abg_view_metabox() {
 
     $html .= ''; 
     $html .= '
-      <table class="form-table">
-      <tbody>
-      <tr>
-      <th><label for="Upload Images"><span id="blop">Monday</span>, from</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[0].'" /></td>
-      <th><label for="Upload Images">To</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[1].'" /></td>
-      </tr>
-      <tr>
-      <th><label for="Upload Images">Tuesday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[2].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[3].'" /></td>
-      </tr>
-      <tr>
-      <th><label for="Upload Images">Wednesday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[4].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[5].'" /></td>
-      </tr>
-      <tr>
-      <th><label for="Upload Images">Thursday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[6].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[7].'" /></td>
-      </tr>
-      <tr>
-      <th><label for="Upload Images">Friday</label></th>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[8].'" /></td>
-      <td><input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[9].'" /></td>
-      </tr>
-      </tbody>
-      </table>
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Monday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[0].'" />
+    </div>
+    <div class="abg-to">  
+      <label for="Upload Images">To</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[1].'" />
+    </div>  
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Tuesday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[2].'" />
+    </div>
+    <div class="abg-to">  
+      <label for="Upload Images">To</label>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[3].'" />
+    </div>  
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Wednesday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[4].'" />
+    </div>
+    <div class="abg-to">
+      <label for="Upload Images">To</label>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[5].'" />
+    </div>  
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Thursday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[6].'" />
+    </div>  
+    <div class="abg-to">
+      <label for="Upload Images">To</label>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[7].'" />
+    </div>  
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Friday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[8].'" />
+    </div>
+    <div class="abg-to">
+      <label for="Upload Images">To</label>    
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[9].'" />
+    </div>  
       ';
     echo $html;
 }
