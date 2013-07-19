@@ -1,3 +1,7 @@
-#test-title{
-	color:red;
+#abg-schedule{
+	width: 240px;
+	border-bottom: none;
+}
+#abg-schedule th{
+	text-align: left;
 }

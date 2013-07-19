@@ -7,6 +7,16 @@ function abg_add_styles() {
   wp_enqueue_style('opening-hours_css');
 }
 
+add_action('admin_init','abg_plugin_init');
+function abg_plugin_init()
+{
+    wp_register_style('opening-hours_css', plugins_url('css/admin.css', __FILE__));
+    wp_enqueue_style('opening-hours_css');
+    wp_enqueue_script('jquery');
+    wp_register_script('abg_admin_common', plugins_url('js/abg_admin_common.js', __FILE__),array("jquery"));
+    wp_enqueue_script('abg_admin_common');
+}
+
 add_shortcode("schedule", "my_shortcode_function");
 
 function my_shortcode_function($atts,$content) {
@@ -16,35 +26,105 @@ function my_shortcode_function($atts,$content) {
                'id' => ''), $atts));
 
     $opening_hours = get_post_meta($id, "_abg_opening_hours", true);
+    $schedule_type = get_post_meta($id, "_abg_opening_hours_sch_type", true);
     $opening_hours = ($opening_hours != '') ? json_decode($opening_hours) : array();
+    
+    if($schedule_type == "complex"){
 
-    return "<table>
+    return    '
+              <table id="abg-schedule">
               <tr>
                 <th>Monday</th>
-                <td></td>
-                <td></td>
+                <td>'.$opening_hours[0].'</td>
+                <td>'.$opening_hours[1].'</td>
+                <td>'.$opening_hours[2].'</td>
+                <td>'.$opening_hours[3].'</td>
               </tr>
               <tr>
-                <th>Monday</th>
-                <td></td>
-                <td></td>
+                <th>Tuesday</th>
+                <td>'.$opening_hours[4].'</td>
+                <td>'.$opening_hours[5].'</td>
+                <td>'.$opening_hours[6].'</td>
+                <td>'.$opening_hours[7].'</td>
               </tr>
               <tr>
-                <th>Monday</th>
-                <td></td>
-                <td></td>
+                <th>Wednesday</th>
+                <td>'.$opening_hours[8].'</td>
+                <td>'.$opening_hours[9].'</td>
+                <td>'.$opening_hours[10].'</td>
+                <td>'.$opening_hours[11].'</td>
               </tr>
               <tr>
-                <th>Monday</th>
-                <td></td>
-                <td></td>
+                <th>Thursday</th>
+                <td>'.$opening_hours[12].'</td>
+                <td>'.$opening_hours[13].'</td>
+                <td>'.$opening_hours[14].'</td>
+                <td>'.$opening_hours[15].'</td>
               </tr>
               <tr>
-                <th>Monday</th>
-                <td></td>
-                <td></td>
+                <th>Friday</th>
+                <td>'.$opening_hours[16].'</td>
+                <td>'.$opening_hours[17].'</td>
+                <td>'.$opening_hours[18].'</td>
+                <td>'.$opening_hours[19].'</td>
               </tr>
-              </table>";
+              <tr>
+              <th>Saturday</th>
+                <td>'.$opening_hours[20].'</td>
+                <td>'.$opening_hours[21].'</td>
+                <td>'.$opening_hours[22].'</td>
+                <td>'.$opening_hours[23].'</td>
+              </tr>
+              <tr>
+                <th>Sunday</th>
+                <td>'.$opening_hours[24].'</td>
+                <td>'.$opening_hours[25].'</td>
+                <td>'.$opening_hours[26].'</td>
+                <td>'.$opening_hours[27].'</td>
+              </tr>
+              </table>';
+    }else{
+          return    '
+              <table id="abg-schedule">
+              <tr>
+                <th>Monday</th>
+                <td>'.$opening_hours[0].'</td>
+                <td>'.$opening_hours[1].'</td>
+              </tr>
+              <tr>
+                <th>Tuesday</th>
+                <td>'.$opening_hours[4].'</td>
+                <td>'.$opening_hours[5].'</td>
+              </tr>
+              <tr>
+                <th>Wednesday</th>
+                <td>'.$opening_hours[8].'</td>
+                <td>'.$opening_hours[9].'</td>
+              </tr>
+              <tr>
+                <th>Thursday</th>
+                <td>'.$opening_hours[12].'</td>
+                <td>'.$opening_hours[13].'</td>
+              </tr>
+              <tr>
+                <th>Friday</th>
+                <td>'.$opening_hours[16].'</td>
+                <td>'.$opening_hours[17].'</td>
+              </tr>
+              <tr>
+              <th>Saturday</th>
+                <td>'.$opening_hours[20].'</td>
+                <td>'.$opening_hours[21].'</td>
+              </tr>
+              <tr>
+                <th>Sunday</th>
+                <td>'.$opening_hours[24].'</td>
+                <td>'.$opening_hours[25].'</td>
+              </tr>
+              </table>';
+    }
+
+
 
 
 }
@@ -101,13 +181,6 @@ function abg_register_opening_hours() {
 
 add_action('add_meta_boxes', 'abg_plugin_meta_box');
 
-add_action('admin_init','my_meta_init');
-function my_meta_init()
-{
-    wp_register_style('opening-hours_css', plugins_url('css/admin.css', __FILE__));
-    wp_enqueue_style('opening-hours_css');
-  }
-
 function abg_plugin_meta_box() {
 
     add_meta_box("abg-opening-hours-metabox", "Opening Hours", 'abg_view_metabox', "opening_hours", "normal");
@@ -118,14 +191,33 @@ function abg_view_metabox() {
     global $post;
 
     $opening_times = get_post_meta($post->ID, "_abg_opening_hours", true);
+    $schedule_type = get_post_meta($post->ID, "_abg_opening_hours_sch_type", true);
     // print_r($gallery_images);exit;
     $opening_times = ($opening_times != '') ? json_decode($opening_times) : array();
 
     // Use nonce for verification
     $html =  '<input type="hidden" name="abg_box_nonce" value="'. wp_create_nonce(basename(__FILE__)). '" />';
-
-    $html .= ''; 
+    if($schedule_type == 'simple'){
+      $html .= '<div class="abg-radios">
+                  <input type="radio" name="schedule_type" checked="checked" value="simple">Simple<br>
+                  <input type="radio" name="schedule_type" value="complex">Complex
+                </div>';
+    }else{
+      if($schedule_type == 'complex'){
+      $html .= '<div class="abg-radios">
+                  <input type="radio" name="schedule_type" value="simple">Simple<br>
+                  <input type="radio" name="schedule_type"  checked="checked" value="complex">Complex
+                </div>';
+      }else{
+      $html .= '<div class="abg-radios">
+                <input type="radio" name="schedule_type" value="simple">Simple<br>
+                <input type="radio" name="schedule_type" value="complex">Complex
+              </div>';
+      }
+    }
     $html .= '
+    
+    <div abg-form>
     <div class="abg-from">
       <label for="Upload Schedule"><span class="abg-day">Monday</span> from</label>
       <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[0].'" />
@@ -133,38 +225,111 @@ function abg_view_metabox() {
     <div class="abg-to">  
       <label for="Upload Images">To</label>
       <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[1].'" />
-    </div>  
+    </div>
+    <div class="abg-and-from">
+      <label for="Upload Schedule">and from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[2].'" />
+    </div> 
+    <div class="abg-and-to">
+      <label for="Upload Schedule">to</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[3].'" />
+    </div>   
     <div class="abg-from">
       <label for="Upload Schedule"><span class="abg-day">Tuesday</span> from</label>
-      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[2].'" />
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[4].'" />
     </div>
     <div class="abg-to">  
       <label for="Upload Images">To</label>  
-      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[3].'" />
-    </div>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[5].'" />
+    </div>
+    <div class="abg-and-from">
+      <label for="Upload Schedule">and from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[6].'" />
+    </div> 
+    <div class="abg-and-to">
+      <label for="Upload Schedule">to</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[7].'" />
+    </div>   
     <div class="abg-from">
       <label for="Upload Schedule"><span class="abg-day">Wednesday</span> from</label>
-      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[4].'" />
-    </div>
-    <div class="abg-to">
-      <label for="Upload Images">To</label>  
-      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[5].'" />
-    </div>  
-    <div class="abg-from">
-      <label for="Upload Schedule"><span class="abg-day">Thursday</span> from</label>
-      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[6].'" />
-    </div>  
-    <div class="abg-to">
-      <label for="Upload Images">To</label>  
-      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[7].'" />
-    </div>  
-    <div class="abg-from">
-      <label for="Upload Schedule"><span class="abg-day">Friday</span> from</label>
       <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[8].'" />
     </div>
     <div class="abg-to">
-      <label for="Upload Images">To</label>    
+      <label for="Upload Images">To</label>  
       <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[9].'" />
+    </div>
+    <div class="abg-and-from">
+      <label for="Upload Schedule">and from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[10].'" />
+    </div> 
+    <div class="abg-and-to">
+      <label for="Upload Schedule">to</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[11].'" />
+    </div>   
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Thursday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[12].'" />
+    </div>
+    <div class="abg-to">
+      <label for="Upload Images">To</label>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[13].'" />
+    </div>
+    <div class="abg-and-from">
+      <label for="Upload Schedule">and from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[14].'" />
+    </div> 
+    <div class="abg-and-to">
+      <label for="Upload Schedule">to</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[15].'" />
+    </div>       
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Friday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[16].'" />
+    </div>  
+    <div class="abg-to">
+      <label for="Upload Images">To</label>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[17].'" />
+    </div>
+    <div class="abg-and-from">
+      <label for="Upload Schedule">and from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[18].'" />
+    </div> 
+    <div class="abg-and-to">
+      <label for="Upload Schedule">to</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[19].'" />
+    </div>
+    <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Saturday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[20].'" />
+    </div>  
+    <div class="abg-to">
+      <label for="Upload Images">To</label>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[21].'" />
+    </div>
+    <div class="abg-and-from">
+      <label for="Upload Schedule">and from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[22].'" />
+    </div> 
+    <div class="abg-and-to">
+      <label for="Upload Schedule">to</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[23].'" />
+    </div>
+        <div class="abg-from">
+      <label for="Upload Schedule"><span class="abg-day">Sunday</span> from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[24].'" />
+    </div>  
+    <div class="abg-to">
+      <label for="Upload Images">To</label>  
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[25].'" />
+    </div>
+    <div class="abg-and-from">
+      <label for="Upload Schedule">and from</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[26].'" />
+    </div> 
+    <div class="abg-and-to">
+      <label for="Upload Schedule">to</label>
+      <input id="fwds_slider_upload" type="text" name="opening_times[]" value="'.$opening_times[27].'" />
+    </div>
     </div>  
       ';
     echo $html;
@@ -197,6 +362,10 @@ function abg_save_opening_hours($post_id) {
 
 
        //print_r($_POST['gallery_img']);exit;
+
+       $sch_type = (isset($_POST['schedule_type']) ? $_POST['schedule_type'] : '');
+
+       update_post_meta($post_id, "_abg_opening_hours_sch_type", $sch_type);
 
        $opening_times= (isset($_POST['opening_times']) ? $_POST['opening_times'] : '');
 
