@@ -199,19 +199,19 @@ function abg_view_metabox() {
     $html =  '<input type="hidden" name="abg_box_nonce" value="'. wp_create_nonce(basename(__FILE__)). '" />';
     if($schedule_type == 'simple'){
       $html .= '<div class="abg-radios">
-                  <input type="radio" name="schedule_type" checked="checked" value="simple">Simple<br>
-                  <input type="radio" name="schedule_type" value="complex">Complex
+                  <input type="radio" name="schedule_type" id="button_simple" checked="checked" value="simple">Simple<br>
+                  <input type="radio" name="schedule_type" id="button_complex" value="complex">Complex
                 </div>';
     }else{
       if($schedule_type == 'complex'){
       $html .= '<div class="abg-radios">
-                  <input type="radio" name="schedule_type" value="simple">Simple<br>
-                  <input type="radio" name="schedule_type"  checked="checked" value="complex">Complex
+                  <input type="radio" name="schedule_type" id="button_simple" value="simple">Simple<br>
+                  <input type="radio" name="schedule_type" id="button_complex" checked="checked" value="complex">Complex
                 </div>';
       }else{
       $html .= '<div class="abg-radios">
-                <input type="radio" name="schedule_type" value="simple">Simple<br>
-                <input type="radio" name="schedule_type" value="complex">Complex
+                <input type="radio" name="schedule_type" id="button_simple" value="simple">Simple<br>
+                <input type="radio" name="schedule_type" id="button_complex" value="complex">Complex
               </div>';
       }
     }
