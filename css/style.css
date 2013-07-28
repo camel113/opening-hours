@@ -1,6 +1,8 @@
 #abg-schedule{
-	width: 240px;
+	width: auto;
 	border-bottom: none;
+	margin: 0;
+	border: none;
 }
 #abg-schedule th{
 	text-align: left;
