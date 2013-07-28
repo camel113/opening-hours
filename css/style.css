@@ -6,4 +6,17 @@
 }
 #abg-schedule th{
 	text-align: left;
+	vertical-align: middle;
+	width: 29px;
+	border: none;
+}
+#abg-schedule tr{
+	border: none;
+}
+#abg-schedule tr td{
+	border: none;
+	padding: 0 5px 0 0;
+}
+#abg-schedule .abg-endday{
+	border-bottom: 1px solid #D1D1E0;
 }
