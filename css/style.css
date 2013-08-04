@@ -20,3 +20,14 @@
 #abg-schedule .abg-endday{
 	border-bottom: 1px solid #D1D1E0;
 }
+#abg-schedule.abg-sch-respwidth{
+	display: none;
+}
+@media only screen and (max-width: 550px) {
+	#abg-schedule.abg-sch-respwidth{
+	display: table;
+	}
+	#abg-schedule.abg-sch-fullwidth{
+	display: none;
+	}
+}

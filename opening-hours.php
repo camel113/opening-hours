@@ -32,7 +32,7 @@ function my_shortcode_function($atts,$content) {
     if($schedule_type == "complex"){
 
     return    '
-              <table id="abg-schedule">
+              <table id="abg-schedule" class="abg-sch-respwidth">
               <tr>
                 <th rowspan="2">Lu.</th>
                 <td>'.$opening_hours[0].'</td>
@@ -93,6 +93,57 @@ function my_shortcode_function($atts,$content) {
                 <td>'.$opening_hours[25].'</td>
               </tr>
               <tr>  
+                <td>'.$opening_hours[26].'</td>
+                <td>'.$opening_hours[27].'</td>
+              </tr>
+              </table>
+              <table id="abg-schedule" class="abg-sch-fullwidth">
+              <tr>
+                <th>Lu.</th>
+                <td>'.$opening_hours[0].'</td>
+                <td>'.$opening_hours[1].'</td>
+                <td>'.$opening_hours[2].'</td>
+                <td>'.$opening_hours[3].'</td>
+              </tr>
+              <tr>
+                <th>Ma.</th>
+                <td>'.$opening_hours[4].'</td>
+                <td>'.$opening_hours[5].'</td>
+                <td>'.$opening_hours[6].'</td>
+                <td>'.$opening_hours[7].'</td>
+              </tr>
+              <tr>
+                <th>Me.</th>
+                <td>'.$opening_hours[8].'</td>
+                <td>'.$opening_hours[9].'</td>
+                <td>'.$opening_hours[10].'</td>
+                <td>'.$opening_hours[11].'</td>
+              </tr>
+              <tr>
+                <th>Je.</th>
+                <td>'.$opening_hours[12].'</td>
+                <td>'.$opening_hours[13].'</td> 
+                <td>'.$opening_hours[14].'</td>
+                <td>'.$opening_hours[15].'</td>
+              </tr>
+              <tr>
+                <th>Ve.</th>
+                <td>'.$opening_hours[16].'</td>
+                <td>'.$opening_hours[17].'</td>
+                <td>'.$opening_hours[18].'</td>
+                <td>'.$opening_hours[19].'</td>
+              </tr>
+              <tr>
+              <th>Sa.</th>
+                <td>'.$opening_hours[20].'</td>
+                <td>'.$opening_hours[21].'</td>
+                <td>'.$opening_hours[22].'</td>
+                <td>'.$opening_hours[23].'</td>
+              </tr>
+              <tr>
+                <th>Di.</th>
+                <td>'.$opening_hours[24].'</td>
+                <td>'.$opening_hours[25].'</td>
                 <td>'.$opening_hours[26].'</td>
                 <td>'.$opening_hours[27].'</td>
               </tr>
