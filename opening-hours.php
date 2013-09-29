@@ -27,7 +27,7 @@ function my_shortcode_function($atts,$content) {
 
     $opening_hours = get_post_meta($id, "_abg_opening_hours", true);
     $schedule_type = get_post_meta($id, "_abg_opening_hours_sch_type", true);
-    $opening_hours = ($opening_hours != '') ? json_decode($opening_hours) : array();
+    $opening_hours = ($opening_hours != '') ? $opening_hours : array();
     
     if($schedule_type == "complex"){
 
@@ -258,7 +258,7 @@ function abg_view_metabox() {
     $opening_times = get_post_meta($post->ID, "_abg_opening_hours", true);
     $schedule_type = get_post_meta($post->ID, "_abg_opening_hours_sch_type", true);
     // print_r($gallery_images);exit;
-    $opening_times = ($opening_times != '') ? json_decode($opening_times) : array();
+    $opening_times = ($opening_times != '') ? $opening_times : array();
 
     // Use nonce for verification
     $html =  '<input type="hidden" name="abg_box_nonce" value="'. wp_create_nonce(basename(__FILE__)). '" />';
@@ -433,8 +433,10 @@ function abg_save_opening_hours($post_id) {
        update_post_meta($post_id, "_abg_opening_hours_sch_type", $sch_type);
 
        $opening_times= (isset($_POST['opening_times']) ? $_POST['opening_times'] : '');
-
-       $opening_times = strip_tags(json_encode($opening_times));
+       //print_r($opening_times);
+       //echo "test";
+       //$opening_times = json_encode($opening_times);
+       //echo $opening_times;
 
        //print_r($opening_times);exit;
 
@@ -460,7 +462,7 @@ function abg_set_custom_edit_opening_hours_columns($columns) {
 function abg_custom_opening_hours_column($column, $post_id) {
 
     $schedule_meta = get_post_meta($post_id, "_fwds_plugin_meta", true);
-    $schedule_meta = ($schedule_meta != '') ? json_decode($schedule_meta) : array();
+    $schedule_meta = ($schedule_meta != '') ? $schedule_meta : array();
 
     switch ($column) {
         case 'schedule_shortcode':
@@ -469,3 +471,4 @@ function abg_custom_opening_hours_column($column, $post_id) {
 
     }
 }
+?>

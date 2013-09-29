@@ -6,7 +6,6 @@
 }
 #abg-schedule th{
 	text-align: left;
-	vertical-align: middle;
 	width: 29px;
 	border: none;
 }
@@ -29,5 +28,8 @@
 	}
 	#abg-schedule.abg-sch-fullwidth{
 	display: none;
+	}
+	#abg-schedule th{
+	vertical-align: middle;
 	}
 }
